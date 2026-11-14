@@ -1,0 +1,36 @@
+﻿@model List<BSIT_32E1_Elective_2_Assignment_1.Models.QuizQuestion>
+
+@{
+    ViewData["Title"] = "Elective 3 - Assignment 1";
+}
+
+<div class="container my-5">
+    <div class="mb-4 border-bottom pb-3">
+        <h1 class="h3 fw-bold">BSIT 32E1 - Elective 3: Assignment 1</h1>
+        <p class="text-muted mb-0">John Raven J. Eullo</p>
+    </div>
+
+    @foreach (var item in Model)
+    {
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-light fw-semibold">
+                @item.Id. @item.QuestionText
+            </div>
+            <ul class="list-group list-group-flush">
+                @foreach (var option in item.Options)
+                {
+                    bool isCorrect = option.Key == item.CorrectOptionKey;
+                    <li class="list-group-item d-flex justify-content-between align-items-center @(isCorrect ? "list-group-item-success fw-bold" : "")">
+                        <span>
+                            <strong>@option.Key)</strong> @option.Value
+                        </span>
+                        @if (isCorrect)
+                        {
+                            <span class="badge bg-success rounded-pill">Correct Answer</span>
+                        }
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+</div>
